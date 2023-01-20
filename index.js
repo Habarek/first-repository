@@ -1,16 +1,24 @@
+require("dotenv").config();
 // Commencer par npm init -y pour pouvoir installer des package
 // Istaller package express
 // Installer package mongoose
 // Installer package uid2 (pour générer des string aléatoir)
 // Installer crypto-js (pour crypter)
 // Lancer le server (npx nodemon + nom du fichier)
+// Installer  package dotenv permet de faire des variable d'environnement
+// Installer le package cors, il permet d'autoriser ou non les demandes provenant de l'extérieur.
 
 // Importer express
 const express = require("express");
+// Importer cors
+const cors = require("cors");
+// Importer dotenv
 // Importer mongoose
 const mongoose = require("mongoose");
 // Création du Server
 const Server = express();
+
+Server.use(cors());
 // Fonction pour pouvoir utiliser les requête en POST sur postman
 Server.use(express.json());
 // Importer cloudinary
@@ -18,12 +26,12 @@ const cloudinary = require("cloudinary").v2;
 // En attendant la MAJ
 mongoose.set("strictQuery", false);
 //Se connecter à mongoose en créant le nom de la BDD(/Vinted)
-mongoose.connect("mongodb://localhost:27017/Vinted");
+mongoose.connect(process.env.MONGODB_URI);
 // Connection à mon compte cloudinary
 cloudinary.config({
-  cloud_name: "das4zg1hz",
-  api_key: "279673591539827",
-  api_secret: "4V6xAtKRKXZX6eSPAvxMATzUnn4",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
   secure: true,
 });
 
@@ -40,6 +48,6 @@ Server.all("*", (req, res) => {
   res.status(404).json({ message: "This routes doesn't exist" });
 });
 //Activation du Server
-Server.listen(3000, () => {
+Server.listen(process.env.PORT, () => {
   console.log("Server Started 🚀");
 });
