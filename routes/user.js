@@ -11,7 +11,6 @@ const router = express.Router();
 
 // Importer la variable 'User' qui contient la valeur du model 'User' qui est dans le dossier models
 const User = require("../models/User");
-const { Router } = require("express");
 
 //-------------CREATION-DE-ROUTE- user (pour l'inscription)---//
 
@@ -87,4 +86,4 @@ router.post("/user/login", async (req, res) => {
   }
 });
 
-module.exports = Router;
+module.exports = router;
