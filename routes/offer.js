@@ -1,7 +1,7 @@
 // Importer express
 const express = require("express");
 // Import fileUpload permet de reçevoir des requête en form-data
-const fileUpload = require("express-fileUpload");
+const fileUpload = require("express-fileupload");
 // Import cloudinary
 const cloudinary = require("cloudinary").v2;
 // Import router pour la communication entres fichiers
